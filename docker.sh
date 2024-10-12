@@ -1,0 +1,1 @@
+docker run -d --name appointment-db  -p 5432:5432 -e POSTGRES_PASSWORD=123456 -v appointment-db:/var/lib/postgresql/data postgres
