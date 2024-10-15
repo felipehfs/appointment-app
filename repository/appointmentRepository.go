@@ -10,8 +10,8 @@ type AppointmentRepository struct {
 	Conn *sql.DB
 }
 
-func NewAppointmentRepository(db *sql.DB) *AppointmentRepository {
-	return &AppointmentRepository{
+func NewAppointmentRepository(db *sql.DB) AppointmentRepository {
+	return AppointmentRepository{
 		Conn: db,
 	}
 }
@@ -99,8 +99,8 @@ func (ar AppointmentRepository) FindById(id int) (appointment dto.SelectAppointm
 func (ar AppointmentRepository) Select() (appointments []dto.SelectAppointment, err error) {
 	sql := `
 		SELECT 
-		a.id, a.schedule_on,c.id, c.name, c.created_at, sex."name" as sex, c.birthday,
-		address.street, address.number, address.neighbor, address.state, address.city
+			a.id, a.schedule_on,c.id, c.name, c.created_at, sex."name" as sex, c.birthday,
+			address.street, address.number, address.neighbor, address.state, address.city
 		FROM appointment.appointment a 
 		INNER JOIN appointment.customer c ON a.customer_id = c.id
 		INNER JOIN appointment.sex ON sex.id = c.sex_id

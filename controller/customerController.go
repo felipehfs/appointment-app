@@ -12,11 +12,11 @@ import (
 )
 
 type CustomerController struct {
-	CustomerRepo *repository.CustomerRepository
+	CustomerRepo repository.CustomerRepository
 }
 
-func NewCustomerController(customerRepository *repository.CustomerRepository) *CustomerController {
-	return &CustomerController{
+func NewCustomerController(customerRepository repository.CustomerRepository) CustomerController {
+	return CustomerController{
 		CustomerRepo: customerRepository,
 	}
 }

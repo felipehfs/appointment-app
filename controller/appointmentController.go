@@ -7,22 +7,23 @@ import (
 	"strconv"
 
 	"github.com/felipehfs/appointment-app/dto"
+	"github.com/felipehfs/appointment-app/infra"
 	"github.com/felipehfs/appointment-app/repository"
 	"github.com/go-playground/validator/v10"
 )
 
 type AppointmentController struct {
-	Repository *repository.AppointmentRepository
+	Repository repository.AppointmentRepository
 }
 
-func NewAppointmentController(repository *repository.AppointmentRepository) *AppointmentController {
-	return &AppointmentController{
+func NewAppointmentController(repository repository.AppointmentRepository) AppointmentController {
+	return AppointmentController{
 		Repository: repository,
 	}
 }
 
 func (ac AppointmentController) Register(mux *http.ServeMux) {
-	mux.HandleFunc("POST /appointments", ac.Insert)
+	mux.HandleFunc("POST /appointments", infra.SecureRoute(ac.Insert))
 	mux.HandleFunc("GET /appointments", ac.Select)
 	mux.HandleFunc("GET /appointments/{id}", ac.FindById)
 	mux.HandleFunc("PUT /appointments/{id}", ac.Update)

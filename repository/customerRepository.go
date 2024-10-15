@@ -10,8 +10,8 @@ type CustomerRepository struct {
 	Conn *sql.DB
 }
 
-func NewCustomerRepository(connection *sql.DB) *CustomerRepository {
-	return &CustomerRepository{
+func NewCustomerRepository(connection *sql.DB) CustomerRepository {
+	return CustomerRepository{
 		Conn: connection,
 	}
 }

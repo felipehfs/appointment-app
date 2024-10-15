@@ -23,9 +23,10 @@ func main() {
 
 	customerController := controller.NewCustomerController(customerRepository)
 	appointmentController := controller.NewAppointmentController(appointmentRepository)
+	authController := controller.NewAuthController()
 
 	withRoutes := infra.RegisterAllRoutes(mux)
-	withRoutes(customerController, appointmentController)
+	withRoutes(customerController, appointmentController, authController)
 
 	http.ListenAndServe(":3000", mux)
 }
